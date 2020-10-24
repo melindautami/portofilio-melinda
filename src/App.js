@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,33 +11,30 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
 
-class App extends React.Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: 'Curirculum Vitae',
-      headerLinks: [
-        { title: 'Home', path: '/' },
-        { title: 'About', path: '/about' },
-        { title: 'Contact', path: '/contact' }
-      ],
-      home: {
-        title: 'Hello,',
-        text: 'my name is Melinda Utami, Im a Front-End Enthusiast. This is my portofolio website, and you can check my last project below.' ,
-        
-      },
-      about: {
-        title: 'About Me'
-      },
-      contact: {
-        title: 'Let\'s Talk'
-      }
-    }
-  }
+export const appsContext = React.createContext({});
+function App() {
+  const [apps] = useState({
+    title: 'Curirculum Vitae',
+    headerLinks: [
+      { title: 'Home', path: '/' },
+      { title: 'About', path: '/about' },
+      { title: 'Contact', path: '/contact' }
+    ],
+    home: {
+      title: 'Hello,',
+      text: 'my name is Melinda Utami. This is my portofolio website, and you can check my last project below.' ,
+      
+    },
+    about: {
+      title: 'About Me'
+    },
+    contact: {
+      title: 'Let\'s Talk'
+    }  
+  });
 
-  render() {
-    return (
+  return (
+    <appsContext.Provider value ={{apps}}>
       <Router>
         <Container className="p-0" fluid={true}>
           
@@ -54,16 +51,16 @@ class App extends React.Component {
             </Navbar.Collapse>
           </Navbar>
 
-          <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subTitle} text={this.state.home.text} />} />
-          <Route path="/about" render={() => <AboutPage title={this.state.about.title} />} />
-          <Route path="/contact" render={() => <ContactPage title={this.state.contact.title} />} />
+          <Route path="/" exact render={() => <HomePage title={apps.home.title} subTitle={apps.home.subTitle} text={apps.home.text} />} />
+          <Route path="/about" render={() => <AboutPage title={apps.about.title} />} />
+          <Route path="/contact" render={() => <ContactPage title={apps.contact.title} />} />
           
           <Footer />
 
         </Container>
       </Router>
-    );
-  }
+    </appsContext.Provider>
+  );
 }
 
 export default App;
