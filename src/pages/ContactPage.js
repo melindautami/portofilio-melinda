@@ -7,6 +7,11 @@ import Hero from '../components/Hero';
 import Content from '../components/Content';
 import Axios from 'axios';
 
+function ContactPage (){
+    const [contact] = useState({
+
+    })
+}
 class ContactPage extends React.Component {
 
     constructor(props) {

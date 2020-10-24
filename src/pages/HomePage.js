@@ -1,13 +1,15 @@
-import React from 'react';
-
+import React, {useContext} from 'react';
+import {appsContext} from '../App'; 
 import Hero from '../components/Hero';
 import Carousel from '../components/Carousel';
 
-function HomePage(props) {
+function HomePage() {
+
+    const {apps} = useContext(appsContext);
 
     return(
         <div>
-            <Hero title={props.title} subTitle={props.subTitle} text={props.text} />
+            <Hero title={apps.home.title} subTitle={apps.home.subTitle} text={apps.home.text} />
             <Carousel />
         </div>
     );

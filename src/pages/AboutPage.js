@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {appsContext} from '../App';
 import Hero from '../components/Hero';
 import Content from '../components/Content';
 
-function AboutPage(props) {
+function AboutPage() {
+    const {apps} = useContext(appsContext);
     return(
         <div>
-            <Hero title={props.title} />
+            <Hero title={apps.about.title} />
             {/* <img src={profile} alt="profile"></img> */}
 
             <Content>
